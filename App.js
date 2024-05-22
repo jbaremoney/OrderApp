@@ -1,32 +1,20 @@
 
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import { View, TextInput, StyleSheet, Text, Button, SafeAreaView} from 'react-native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import * as React from 'react'; //need for react
+import {NavigationContainer} from '@react-navigation/native'; //need for navigation between screens
+import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
+import LoginScreen from './Screens/LoginScreen'; //need to use this screen
+import ProfileScreen from './Screens/ProfileScreen'; //need to use this screen
 
+const Stack = createNativeStackNavigator(); //creates a stack for the screens
 
-
-
-const Stack = createNativeStackNavigator();
-
-const HomeScreen = ({navigation}) => {
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text>Home Screen</Text>
-    <Button title="Go to Screen 2" onPress={() => navigation.navigate(ProfileScreen)} />
-  </View>
-};
-
-const ProfileScreen = ({navigation, route}) => {
-  return <Text>This is {route.params.name}'s profile</Text>;
-};
 
 const App = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer> 
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Home" //home screen
+          component={LoginScreen}
           options={{title: 'Welcome'}}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
@@ -35,7 +23,7 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -43,12 +31,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   input: {
+    fontSize: 16,
+    textAlign: 'center',
     height: 40,
+    width: 100,
     margin: 12,
     borderWidth: 1,
     padding: 10,
   },
-});
+  text: {
+    fontSize: 16,
+    marginBottom: 5
+  },
+  header: {
+    fontSize: 30,
+    marginBottom: 5
+  },
+  button: {
+      alignItems: 'center',
+      backgroundColor: '#DDDDDD',
+      padding: 10,
+      marginBottom: 10,
+    }
+});*/
 
 export default App;
 
