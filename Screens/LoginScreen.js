@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Text, Button} from 'react-native';
+import { StackActions } from '@react-navigation/native';
+
 
 
 const LoginScreen = ({navigation}) => {
@@ -21,25 +23,36 @@ const LoginScreen = ({navigation}) => {
 
       <TextInput style={styles.input} //textbox
          placeholder='Email'
-         onChangeText={(text) => setEmail(text)} //this updates the email variable.
+         value = {email}
+         onChangeText={setEmail} //this updates the email variable.
       />
       <Text style = {styles.text}>Username</Text>
 
       <TextInput style={styles.input}
          placeholder='Username'
-         onChangeText={(text) => setUserName(text)} //Updated username variable
+         value = {username}
+         onChangeText={setUserName} //Updated username variable
       />
       <Text style = {styles.text}>Password</Text>
 
       <TextInput style={styles.input} 
         secureTextEntry={true} //makes it so you can't see password being entered
         placeholder='Password'
-        onChangeText={(text) => setPassword(text)} //Updates password variable
+        value = {password}
+        onChangeText={setPassword} //Updates password variable
       />
 
       <Button style = {styles.button} title="Test" onPress={handleButtonClick} /> 
-      <Button style = {styles.button} title="Login" onPress={() => navigation.navigate("Profile")} /> 
+      <Button style = {styles.button} title="Login" onPress={() => navigation.dispatch(
+            StackActions.replace('Profile', {
+            email: email, username: username, password: password},
+      ))}
+      /> 
       {showText && <Text style={styles.text}>Display Text: {displayText}</Text>}
+      <Button
+         title="Update the title"
+         onPress={() => navigation.setOptions({ title: 'Updated!', headerStyle: { backgroundColor: '#f4511e',}, })}
+      />
     </View>
     )
 };
@@ -49,7 +62,7 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'top',
+      justifyContent: 'center',
     },
     input: {
       fontSize: 16,

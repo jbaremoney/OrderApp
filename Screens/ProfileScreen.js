@@ -1,18 +1,42 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, Button} from 'react-native';
+import { StackActions } from '@react-navigation/native';
 import myImage from './minionepic.jpg'; //getting an image from file
 
-const ProfileScreen = ({navigation}) => {
+const ProfileScreen = ({route, navigation}) => {
+    const { email, username, password } = route.params;
+    const [count, setCount] = React.useState(0)
+    const [showText, setShowText] = React.useState(false); //Turn on the textbox with this.
+
+
+    function handleButtonClick() { //function that handles the buttonclick
+        setCount((c) => c + 1);
+        setShowText(true);
+
+    };
+
+
+    React.useEffect(() => {
+        // Use `setOptions` to update the button that we previously specified
+        // Now the button includes an `onPress` handler to update the count
+        navigation.setOptions({
+          headerRight: () => (
+            <Button title = "Fun Button" onPress={handleButtonClick} />
+          ),
+        });
+    }, [navigation]);
+
     return(
     <View style = {styles.container}>
 
       <Button //button that goes home
         style = {styles.button} 
         title = 'GO HOME' 
-        onPress={() => navigation.navigate("Home")} //navigation.navigate is what navigates screens.
+        onPress={() => navigation.dispatch(StackActions.replace("Home"))} //navigation.navigate is what navigates screens.
       />
 
       <Text style = {styles.text}>This is ballss profile</Text> 
+      <Text style = {styles.text}>Email: {email}, Username: {username}, Password: {password}</Text>
 
       <Image 
         style={styles.tinyLogo}
@@ -21,6 +45,8 @@ const ProfileScreen = ({navigation}) => {
         }}
       />
       <Image style = {styles.picture} source={myImage} />
+      {showText && <Text style = {styles.text}>Hi My Name Jeff: {count}</Text>}
+
     </View>
     )
 };
