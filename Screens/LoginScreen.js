@@ -46,11 +46,7 @@ const LoginScreen = ({navigation}) => {
         onPress={() => navigation.dispatch(StackActions.replace('Home'))}
       /> 
       {showText && <Text style={styles.text}>Display Text: {displayText}</Text>}
-      <Button
-         title="Update the title"
-         onPress={() => navigation.setOptions({ title: 'Updated!', headerStyle: { backgroundColor: '#f4511e',}, })}
-      />
-
+      
     </View>
     )
 };
