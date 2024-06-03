@@ -1,3 +1,5 @@
+//TESTER SCREEN THIS DOESN'T AFFECT ANYTHING SO FAR
+
 import React from 'react';
 import { View, Image, StyleSheet, Text, Button} from 'react-native';
 import { StackActions } from '@react-navigation/native';
@@ -17,6 +19,7 @@ const ProfileScreen = ({route, navigation}) => {
 
 
     React.useEffect(() => {
+      //This all is needed to use navigationbar buttons affect the screen.
         // Use `setOptions` to update the button that we previously specified
         // Now the button includes an `onPress` handler to update the count
         navigation.setOptions({
@@ -32,7 +35,7 @@ const ProfileScreen = ({route, navigation}) => {
       <Button //button that goes home
         style = {styles.button} 
         title = 'GO HOME' 
-        onPress={() => navigation.dispatch(StackActions.replace("Home"))} //navigation.navigate is what navigates screens.
+        onPress={() => navigation.dispatch(StackActions.replace("Login"))} //navigation.navigate is what navigates screens.
       />
 
       <Text style = {styles.text}>This is ballss profile</Text> 

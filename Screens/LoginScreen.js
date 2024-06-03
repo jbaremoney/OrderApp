@@ -17,24 +17,22 @@ const LoginScreen = ({navigation}) => {
       };
 
     return(
-    <View style={styles.container}>
-      <Text style = {styles.header}>Home Screen</Text>
+  <View style = {styles.container}>
       <Text style = {styles.text}>Email</Text>
-
       <TextInput style={styles.input} //textbox
-         placeholder='Email'
-         value = {email}
-         onChangeText={setEmail} //this updates the email variable.
+        placeholder='Email'
+        value = {email}
+        onChangeText={setEmail} //this updates the email variable.
       />
+
       <Text style = {styles.text}>Username</Text>
-
       <TextInput style={styles.input}
-         placeholder='Username'
-         value = {username}
-         onChangeText={setUserName} //Updated username variable
+        placeholder='Username'
+        value = {username}
+        onChangeText={setUserName} //Updated username variable
       />
-      <Text style = {styles.text}>Password</Text>
 
+      <Text style = {styles.text}>Password</Text>
       <TextInput style={styles.input} 
         secureTextEntry={true} //makes it so you can't see password being entered
         placeholder='Password'
@@ -43,16 +41,16 @@ const LoginScreen = ({navigation}) => {
       />
 
       <Button style = {styles.button} title="Test" onPress={handleButtonClick} /> 
-      <Button style = {styles.button} title="Login" onPress={() => navigation.dispatch(
-            StackActions.replace('Profile', {
-            email: email, username: username, password: password},
-      ))}
+      <Button style = {styles.button} 
+        title="Login" 
+        onPress={() => navigation.dispatch(StackActions.replace('Home'))}
       /> 
       {showText && <Text style={styles.text}>Display Text: {displayText}</Text>}
       <Button
          title="Update the title"
          onPress={() => navigation.setOptions({ title: 'Updated!', headerStyle: { backgroundColor: '#f4511e',}, })}
       />
+
     </View>
     )
 };
