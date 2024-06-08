@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Button, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, app } from '/Users/z3u5/OrderApp/firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
+import { auth } from '/Users/z3u5/OrderApp/firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
 
 
 
@@ -11,13 +11,17 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        Alert.alert("Success", "You are logged in!");
-        navigation.navigate('mainNavigator');
-      })
-      .catch(error => {
-        Alert.alert("Authentication Failed", error.message);
-      });
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user; // creates user so it's not null
+    Alert.alert("Login Success", "You are now logged in!");
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    Alert.alert("Login Failed", errorMessage);
+  });
   };
 
 
