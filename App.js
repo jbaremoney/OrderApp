@@ -1,7 +1,7 @@
 //TODO make main navigator stuff work, make login work 
 
-import AuthNavigator from '/Users/z3u5/OrderApp/accountAuth/AuthNavigator.js'
-import MainNavigator from '/Users/z3u5/OrderApp/mainStuff/mainNavigator.js'
+import AuthNavigator from './accountAuth/AuthNavigator.js'
+import MainNavigator from './mainStuff/HomeScreen.js'
 
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
