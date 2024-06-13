@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button, Image} from 'react-native';
-import PropTypes from 'prop-types';
 
 
 //myClass.js
@@ -39,7 +38,7 @@ export default class CreateDrink extends React.Component {
         subContainer: {
             flex: 1,
             flexDirection: 'column',
-            backgroundColor: 'pink',
+            backgroundColor: 'white',
             alignItems: 'center',
             justifyContent: 'center',
         },
@@ -53,11 +52,10 @@ export default class CreateDrink extends React.Component {
         },
         button: {
             alignItems: 'center',
-            backgroundColor: '#DDDDDD',
+            backgroundColor: 'red',
             padding: 10,
             marginBottom: 10,
           }
       });
   }
   
-  CreateDrink.propTypes = { name: PropTypes.string.isRequired, price: PropTypes.string.isRequired, imageLink: PropTypes.string.isRequired };

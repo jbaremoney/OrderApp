@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, Button, Text, TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
 
@@ -26,6 +26,7 @@ const LoginScreen = ({ navigation }) => {
 
 
   return (
+    <ScrollView contentContainerStyle = {styles.container}>
     <View style={styles.container}>
       <Text style={styles.label}>Email:</Text>
       <TextInput
@@ -48,6 +49,7 @@ const LoginScreen = ({ navigation }) => {
         onPress={() => navigation.navigate('CreateAccount')}
       />
     </View>
+    </ScrollView>
   );
 };
 
