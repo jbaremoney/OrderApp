@@ -1,6 +1,6 @@
 //TODO make this screen funcitonal, as it just displays text.
 //import CreateDrink from "../../Components/CreateDrink"; 
-import CreateDrink from '/Users/owenr/OneDrive/Desktop/OrderApp/Classes/CreateDrink' //make sure this is the correct path
+import CreateDrink from '../Classes/CreateDrink' //make sure this is the correct path
 import React from 'react';
 import { View, StyleSheet, Text, Button, Image} from 'react-native';
 

@@ -9,7 +9,7 @@ import GiftScreen  from './GiftScreen';
 
 const Tab = createBottomTabNavigator(); //This is the bottom tab
 
-const HomeScreen = () => {
+const MainTabNavigator = () => {
   return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -55,4 +55,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default MainTabNavigator;
