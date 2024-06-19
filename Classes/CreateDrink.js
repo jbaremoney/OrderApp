@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet, Text, Button, Image} from 'react-native';
 
 
-//myClass.js
 export default class CreateDrink extends React.Component {
     constructor(props) {
         super(props);
@@ -18,6 +17,7 @@ export default class CreateDrink extends React.Component {
               <Text style = {this.styles.text}>
                 {this.props.name} - ${this.props.price}
               </Text>
+              
               <Button 
                 style = {this.styles.button}
                 title = 'Add to Cart'

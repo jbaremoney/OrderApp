@@ -1,7 +1,7 @@
 //TODO make main navigator stuff work, make login work 
 
 import AuthNavigator from './accountAuth/AuthNavigator.js'
-import MainNavigator from './mainStuff/HomeScreen.js'
+import HomeScreen from './mainStuff/HomeScreen.js'
 
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -24,7 +24,7 @@ function App() {
   return (
     // conditional rendering based on auth status
     <NavigationContainer> 
-      {isAuthenticated ? <MainNavigator /> : <AuthNavigator />} 
+      {isAuthenticated ? <HomeScreen /> : <AuthNavigator />} 
     </NavigationContainer>
   );
 }

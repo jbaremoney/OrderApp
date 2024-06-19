@@ -5,11 +5,18 @@ import UserScreen from './UserScreen';
 import OrderScreen  from './OrderScreen';
 import MapScreen  from './MapScreen';
 import GiftScreen  from './GiftScreen';
+import CartScreen from './CartScreen'
+import { Text, TouchableOpacity } from 'react-native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
+
 //Need user icon, drink icon, map icon, gift icon
 
 const Tab = createBottomTabNavigator(); //This is the bottom tab
+const Stack = createNativeStackNavigator(); //creates a stack for the screens
 
-const HomeScreen = () => {
+
+
+const HomeTabs = ({navigation}) => {
   return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -43,16 +50,39 @@ const HomeScreen = () => {
                     display: "flex"
                   },
                   null
-                ]
-              
+                ],
+      
+                 headerRight:() => <TouchableOpacity style = {{marginRight:20}} onPress={() =>
+
+                  navigation.navigate('Cart')
+                }>
+                    <Icon
+                       name = {'shopping-cart'}
+                       color = {'black'}
+                       size = {24}
+                     />
+                 </TouchableOpacity>
+                 
         })}
       >
-        <Tab.Screen name="Order" component={OrderScreen} /> 
+        <Tab.Screen name="Order" component={OrderScreen} screenOptions />
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Gift" component={GiftScreen} />
         <Tab.Screen name="User Info" component={UserScreen} />
       </Tab.Navigator>//This all is adding the screens to the tab. You can add as many screens as you want. 
   );
 };
+
+function HomeScreen() {
+  return (
+      <Stack.Navigator screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name="Order" component={HomeTabs}/>
+        <Stack.Screen name="Cart" component={CartScreen} options={{headerShown:true,}}
+        />
+      </Stack.Navigator>
+  );
+}
 
 export default HomeScreen;
