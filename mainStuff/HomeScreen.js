@@ -9,11 +9,11 @@ import CartScreen from './CartScreen'
 import { Text, TouchableOpacity } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
 
+
 //Need user icon, drink icon, map icon, gift icon
 
 const Tab = createBottomTabNavigator(); //This is the bottom tab
 const Stack = createNativeStackNavigator(); //creates a stack for the screens
-
 
 
 const HomeTabs = ({navigation}) => {
@@ -52,10 +52,10 @@ const HomeTabs = ({navigation}) => {
                   null
                 ],
       
-                 headerRight:() => <TouchableOpacity style = {{marginRight:20}} onPress={() =>
-
-                  navigation.navigate('Cart')
-                }>
+                 headerRight:() => <TouchableOpacity style = {{marginRight:20}} onPress={() => 
+                    
+                    navigation.navigate('Cart')
+                  }>
                     <Icon
                        name = {'shopping-cart'}
                        color = {'black'}
@@ -65,7 +65,7 @@ const HomeTabs = ({navigation}) => {
                  
         })}
       >
-        <Tab.Screen name="Order" component={OrderScreen} screenOptions />
+        <Tab.Screen name="Order" component={OrderScreen} />
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Gift" component={GiftScreen} />
         <Tab.Screen name="User Info" component={UserScreen} />
@@ -79,7 +79,11 @@ function HomeScreen() {
         headerShown: false
       }}>
         <Stack.Screen name="Order" component={HomeTabs}/>
-        <Stack.Screen name="Cart" component={CartScreen} options={{headerShown:true,}}
+        <Stack.Screen name="Cart" component={CartScreen}  options={
+          {
+            headerShown:true,
+          }
+        }
         />
       </Stack.Navigator>
   );

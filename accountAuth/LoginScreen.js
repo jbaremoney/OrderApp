@@ -1,7 +1,10 @@
+//Add a show password button
+
 import React, { useState } from 'react';
 import { View, Button, Text, TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
+import Styles from '../mainStuff/StyleSheet'
 
 
 
@@ -26,18 +29,18 @@ const LoginScreen = ({ navigation }) => {
 
 
   return (
-    <ScrollView contentContainerStyle = {styles.container}>
-    <View style={styles.container}>
-      <Text style={styles.label}>Email:</Text>
+    <ScrollView contentContainerStyle = {Styles.container}>
+    <View style={Styles.container}>
+      <Text style={Styles.label}>Email:</Text>
       <TextInput
-        style={styles.input}
+        style={Styles.input}
         placeholder="Enter your email"
         value={email}
         onChangeText={setEmail}  // Update email state when text changes
       />
-      <Text style={styles.label}>Password:</Text>
+      <Text style={Styles.label}>Password:</Text>
       <TextInput
-        style={styles.input}
+        style={Styles.input}
         secureTextEntry={true}
         placeholder="Enter your password"
         value={password}
@@ -46,31 +49,12 @@ const LoginScreen = ({ navigation }) => {
       <Button title="Login" onPress={handleLogin} />
       <Button
         title="Create Account"
-        onPress={() => navigation.navigate('CreateAccount')}
+        onPress={() => navigation.navigate('Create Account')}
       />
     </View>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  input: {
-    fontSize: 16,
-    height: 40,
-    marginBottom: 20,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 5,
-  },
-});
 
 export default LoginScreen;

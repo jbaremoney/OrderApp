@@ -3,6 +3,7 @@ import CreateDrink from './CreateDrink' //make sure this is the correct path
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Styles from '../mainStuff/StyleSheet'
 
 
 export default class CreateCollapsible extends React.Component {
@@ -12,10 +13,10 @@ export default class CreateCollapsible extends React.Component {
 
     render() {
         return (
-            <View contentContainerStyle = {styles.scrollView}>
-                <TouchableOpacity style = {styles.collapseButton} onPress={() => (this.props.setCollapsed(!this.props.collapsed))}>
+            <View contentContainerStyle = {Styles.scrollView}>
+                <TouchableOpacity style = {Styles.collapseButton} onPress={() => (this.props.setCollapsed(!this.props.collapsed))}>
                     
-                    <Text style = {styles.text} > {this.props.title} </Text>
+                    <Text style = {Styles.text} > {this.props.title} </Text>
                     {this.props.collapsed ? <Icon name = {'caret-down'} color = {'black'} size = {24} />: <Icon name = {'caret-up'} color = {'black'} size = {24} /> }
                     
                 </TouchableOpacity>
@@ -28,28 +29,3 @@ export default class CreateCollapsible extends React.Component {
         );
     }
 }
-
-styles = StyleSheet.create({
-    scrollView: {
-      justifyContent: 'space-between',
-      backgroundColor: '#fff',
-      padding: 20,
-      margin: 10,
-    },
-    collapseButton: {
-      backgroundColor: 'green',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      padding: 10,
-      marginBottom: 10,
-      borderWidth: 2,
-      borderTopLeftRadius: 20,
-      borderTopRightRadius: 20,
-      borderBottomLeftRadius: 20,
-      borderBottomRightRadius: 20,
-    },
-    text: {
-        fontSize: 16,
-        padding: 3,
-    }
-  });

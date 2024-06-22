@@ -8,6 +8,8 @@
 import CreateCollapsible from '../Classes/CreateCollapsible';
 import React from 'react';
 import { View, StyleSheet, Text, Button, Image, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import Styles from '../mainStuff/StyleSheet'
+
 
 export default function Screen2() {
   // const [firstCollapsed, setFirstCollapsed] = React.useState(true)
@@ -33,7 +35,7 @@ export default function Screen2() {
 
 
     return (
-        <ScrollView contentContainerStyle = {styles.scrollView}>
+        <ScrollView contentContainerStyle = {Styles.scrollView}>
           <CreateCollapsible
               title = "First Drink"
               info = {info}
@@ -72,49 +74,3 @@ export default function Screen2() {
         </ScrollView>
     );
 }
-
-styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  scrollView: {
-    justifyContent: 'space-between',
-    backgroundColor: '#fff',
-    padding: 20,
-    margin: 10,
-  },
-  subContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'pink',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: 300,
-    height: 300,
-  },
-  text: {
-    fontSize: 16,
-    padding: 10,
-  },
-  collapseButton: {
-    backgroundColor: 'green',
-    padding: 10,
-    marginBottom: 10,
-    borderWidth: 2,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-    marginBottom: 10,
-  }
-});

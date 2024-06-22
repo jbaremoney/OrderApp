@@ -8,7 +8,7 @@ export default function AuthNavigator() {
   return (
     <AuthStack.Navigator initialRouteName="Login">
       <AuthStack.Screen name="Login" component={LoginScreen} />
-      <AuthStack.Screen name="CreateAccount" component={CreateAccountScreen} />
+      <AuthStack.Screen name="Create Account" component={CreateAccountScreen} />
     </AuthStack.Navigator>
   );
 }

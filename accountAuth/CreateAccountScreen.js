@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import Styles from '../mainStuff/StyleSheet'
+
 
 export default function CreateAccountScreen() {
   const [email, setEmail] = useState('');
@@ -34,9 +36,9 @@ export default function CreateAccountScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={Styles.createAccountContainer}>
       <TextInput
-        style={styles.input}
+        style={Styles.input}
         onChangeText={setEmail}
         value={email}
         placeholder="Email"
@@ -44,20 +46,20 @@ export default function CreateAccountScreen() {
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
+        style={Styles.input}
         onChangeText={setUsername}
         value={username}
         placeholder="Username"
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
+        style={Styles.input}
         onChangeText={setPassword}
         value={password}
         placeholder="Password"
         secureTextEntry
       />
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+      {error ? <Text style={Styles.error}>{error}</Text> : null}
       <Button
         title="Create Account"
         onPress={handleSignUp}
@@ -65,22 +67,3 @@ export default function CreateAccountScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-  },
-  input: {
-      width: '80%',
-      height: 40,
-      padding: 10,
-      borderWidth: 1,
-      borderColor: 'gray',
-      marginBottom: 10
-  },
-  error: {
-      color: 'red',
-  }
-});
