@@ -6,7 +6,7 @@ import { View, Text} from 'react-native';
 export default function Screen1() {
     return (
       <View>
-        <Text> User Screen </Text>
+        <Text> cart Screen </Text>
       </View>
     );
   }

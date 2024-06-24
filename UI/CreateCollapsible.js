@@ -1,9 +1,9 @@
 import React from 'react';
 import CreateDrink from './CreateDrink' //make sure this is the correct path
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { Text, View, TouchableOpacity} from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Styles from '../mainStuff/StyleSheet'
+import Styles from './StyleSheet'
 
 
 export default class CreateCollapsible extends React.Component {

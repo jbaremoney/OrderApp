@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { View, Button, Text, TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
-import Styles from '../mainStuff/StyleSheet'
+import Styles from '../UI/StyleSheet'
 
 
 

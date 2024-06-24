@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import UserScreen from './UserScreen';
-import OrderScreen  from './OrderScreen';
-import MapScreen  from './MapScreen';
-import GiftScreen  from './GiftScreen';
-import CartScreen from './CartScreen'
-import { Text, TouchableOpacity } from 'react-native';
+import UserScreen from './User/UserScreen';
+import CartScreen from './Ordering/CartScreen'
+import MapScreen  from './Map/MapScreen';
+import GiftScreen  from './Rewards/GiftScreen';
+import { TouchableOpacity } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
+import BarsMenusNav from './Ordering/BarsMenusNav';
 
 
 //Need user icon, drink icon, map icon, gift icon
@@ -16,9 +16,10 @@ const Tab = createBottomTabNavigator(); //This is the bottom tab
 const Stack = createNativeStackNavigator(); //creates a stack for the screens
 
 
-const HomeTabs = ({navigation}) => {
+const MainTabNavigator = ({navigation}) => {
   return (
       <Tab.Navigator
+        initialRouteName='Order'
         screenOptions={({ route }) => ({
           tabBarIcon: ({  color, size }) => {
             let iconName;
@@ -65,7 +66,7 @@ const HomeTabs = ({navigation}) => {
                  
         })}
       >
-        <Tab.Screen name="Order" component={OrderScreen} />
+        <Tab.Screen name="Order" component={BarsMenusNav} />
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Gift" component={GiftScreen} />
         <Tab.Screen name="User Info" component={UserScreen} />
@@ -73,7 +74,7 @@ const HomeTabs = ({navigation}) => {
   );
 };
 
-function HomeScreen() {
+function CartNavigator() {
   return (
       <Stack.Navigator screenOptions={{
         headerShown: false
@@ -89,4 +90,4 @@ function HomeScreen() {
   );
 }
 
-export default HomeScreen;
+export default  MainTabNavigator ;
