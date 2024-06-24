@@ -21,7 +21,9 @@ export default function CreateAccountScreen() {
         const user = userCredential.user;
         return setDoc(doc(firestore, "users", user.uid), {
           username: username,
-          email: email
+          email: email,
+          cart: {}
+          
         });
       })
       .then(() => {

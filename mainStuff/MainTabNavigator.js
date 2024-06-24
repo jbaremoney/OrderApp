@@ -5,6 +5,7 @@ import UserScreen from './UserScreen';
 import OrderScreen  from './OrderScreen';
 import MapScreen  from './MapScreen';
 import GiftScreen  from './GiftScreen';
+import BarsMenusNav from './BarsMenusNav';
 //Need user icon, drink icon, map icon, gift icon
 
 const Tab = createBottomTabNavigator(); //This is the bottom tab
@@ -47,7 +48,7 @@ const MainTabNavigator = () => {
               
         })}
       >
-        <Tab.Screen name="Order" component={OrderScreen} /> 
+        <Tab.Screen name="Order" component={BarsMenusNav} /> 
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Gift" component={GiftScreen} />
         <Tab.Screen name="User Info" component={UserScreen} />
