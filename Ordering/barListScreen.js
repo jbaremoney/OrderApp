@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
-import { app, db } from '../firebaseStuff/firebaseConfig';
+import { db } from '../firebaseStuff/firebaseConfig';
 
 const BarListScreen = ({ navigation }) => {
   const [bars, setBars] = useState([]);
@@ -33,7 +33,7 @@ const BarListScreen = ({ navigation }) => {
   }, []);
 
   const handleBarPress = (barId) => {
-    navigation.navigate('Menu', { barId });
+    navigation.navigate('Drinks', { barId });
   };
 
   if (loading) {

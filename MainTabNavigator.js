@@ -2,10 +2,11 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import UserScreen from './User/UserScreen';
-import CartScreen from './Ordering/CartScreen'
+import BarsMenusNav  from './Ordering/BarsMenusNav';
 import MapScreen  from './Map/MapScreen';
 import GiftScreen  from './Rewards/GiftScreen';
-import { TouchableOpacity } from 'react-native';
+import CartScreen from './Ordering/CartScreen'
+import { Text, TouchableOpacity } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
 import BarsMenusNav from './Ordering/BarsMenusNav';
 
@@ -79,7 +80,7 @@ function CartNavigator() {
       <Stack.Navigator screenOptions={{
         headerShown: false
       }}>
-        <Stack.Screen name="Order" component={HomeTabs}/>
+        <Stack.Screen name="OrderTab" component={HomeTabs}/>
         <Stack.Screen name="Cart" component={CartScreen}  options={
           {
             headerShown:true,

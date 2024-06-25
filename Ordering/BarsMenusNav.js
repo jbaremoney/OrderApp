@@ -1,14 +1,15 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import barListScreen from './barListScreen';
-import MenuScreen from './MenuScreen';
+import barListScreen from "./barListScreen";
+import MenuScreen from "./MenuScreen";
 
-const BarMenusNavStack = createStackNavigator();
+
+const BarsMenusStack = createStackNavigator()
 
 export default function BarsMenusNav(){
     return(
-        <BarMenusNavStack.Navigator initialRouteName="Bar List">
-            <BarMenusNavStack.Screen name="Bar List" component={barListScreen}/>
-            <BarMenusNavStack.Screen name="Menu" component={MenuScreen}/>
-        </BarMenusNavStack.Navigator>
+    <BarsMenusStack.Navigator initialRouteName="Bars">
+        <BarsMenusStack.Screen name="Bars" component={barListScreen}/>
+        <BarsMenusStack.Screen name="Drinks" component={MenuScreen}/>
+    </BarsMenusStack.Navigator>
     )
 }

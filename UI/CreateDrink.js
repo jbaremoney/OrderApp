@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, Image} from 'react-native';
+import { View, StyleSheet, Text, Button, Image} from 'react-native';
 import Styles from './StyleSheet'
 
 export default class CreateDrink extends React.Component {
