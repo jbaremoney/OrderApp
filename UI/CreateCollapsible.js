@@ -5,11 +5,16 @@ import Collapsible from 'react-native-collapsible';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Styles from './StyleSheet'
 
+function setCollapsed(collapsed){
+    const newCollapsed = !collapsed
+    return newCollapsed
+}
 
 export default class CreateCollapsible extends React.Component {
     constructor(props) {
         super(props);
     }
+
 
     render() {
         return (

@@ -8,7 +8,6 @@ import GiftScreen  from './Rewards/GiftScreen';
 import CartScreen from './Ordering/CartScreen'
 import { Text, TouchableOpacity } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
-import BarsMenusNav from './Ordering/BarsMenusNav';
 
 
 //Need user icon, drink icon, map icon, gift icon
@@ -17,7 +16,7 @@ const Tab = createBottomTabNavigator(); //This is the bottom tab
 const Stack = createNativeStackNavigator(); //creates a stack for the screens
 
 
-const MainTabNavigator = ({navigation}) => {
+const HomeTabs = ({navigation}) => {
   return (
       <Tab.Navigator
         initialRouteName='Order'
@@ -75,7 +74,7 @@ const MainTabNavigator = ({navigation}) => {
   );
 };
 
-function CartNavigator() {
+function HomeScreen() {
   return (
       <Stack.Navigator screenOptions={{
         headerShown: false
@@ -91,4 +90,4 @@ function CartNavigator() {
   );
 }
 
-export default  MainTabNavigator ;
+export default HomeScreen;

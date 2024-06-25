@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseStuff/firebaseConfig';
+import styles from '../UI/StyleSheet';
 
 const BarListScreen = ({ navigation }) => {
   const [bars, setBars] = useState([]);
@@ -45,14 +46,14 @@ const BarListScreen = ({ navigation }) => {
   }
 
   return (
-    <View>
-      <Text>Bar List</Text>
+    <View style = {styles.container}>
+      <Text style = {styles.text}>Bar List</Text>
       <FlatList
         data={bars}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleBarPress(item.id)}>
-            <Text>{item.name}</Text>
+          <TouchableOpacity style = {styles.button} onPress={() => handleBarPress(item.id)}>
+            <Text style = {styles.barListText}>{item.name}</Text>
           </TouchableOpacity>
         )}
       />

@@ -1,10 +1,6 @@
 
 //TODO make this screen funcitonal, as it just displays text.
 
-
-//This works in two ways, one using the CreateCollapsible.js class, and one hard coding. I'm leaving both here in case we want
-//To use either, but I will be using the class method moving forward because I worked hard on it :p
-
 //import CreateDrink from '../Classes/CreateDrink' //make sure this is the correct path
 import CreateCollapsible from '../UI/CreateCollapsible';
 import React, { useEffect, useState } from 'react';
@@ -14,24 +10,17 @@ import {db} from '../firebaseStuff/firebaseConfig'; // Path to your firebaseConf
 import { collection, getDocs } from 'firebase/firestore';
 
 
-export default function MenuScreen() {
-    const info = [
-      { name: 'dollarita', price: '2.50', imageLink: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Skibidi_toilet_screenshot.webp/220px-Skibidi_toilet_screenshot.webp.png'},
-      { name: 'fortnite', price: '1000.00', imageLink: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Skibidi_toilet_screenshot.webp/220px-Skibidi_toilet_screenshot.webp.png'},
-      { name: 'dookie', price: '4322345.22', imageLink: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Skibidi_toilet_screenshot.webp/220px-Skibidi_toilet_screenshot.webp.png'},
-      { name: 'dollarita', price: '2.50', imageLink: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Skibidi_toilet_screenshot.webp/220px-Skibidi_toilet_screenshot.webp.png'},
-    ];
-
-    const [firstCollapsed, setFirstCollapsed] = useState(true)
-    const [secondCollapsed, setSecondCollapsed] = useState(true)
-
+const MenuScreen = ({ route }) => {
+    const { barId } = route.params;
     const [drinks, setDrinks] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
       const fetchBars = async () => {
         try {
           console.log("Fetching bars...");
-          const drinkCollection = collection(db, 'bars/JoeBlacks-/drinks');
+          const drinkCollection = collection(db, 'bars', barId, 'drinks');
           const drinkSnapshot = await getDocs(drinkCollection);
           //console.log("Bars snapshot: ", barsSnapshot);
           const drinkList = drinkSnapshot.docs.map(doc => ({
@@ -41,31 +30,56 @@ export default function MenuScreen() {
           console.log("Drink list: ", drinkList);
           setDrinks(drinkList);
         } catch (error) {
-          //setError(error);
+          setError(error);
           console.error("Error fetching bars: ", error);
-        // } finally {
-        //   setLoading(false);
+         } finally {
+           setLoading(false);
         }
       };
   
       fetchBars();
     }, []);
 
+    const groupedData = drinks.reduce((acc, item) => {
+      if (!acc[item.type]) {
+        acc[item.type] = [];
+      }
+      acc[item.type].push(item);
+      return acc;
+    }, {});
+
+    const [typeStates, setTypeStates] = useState({});
+
+    // Step 4: Helper function to toggle state for each type
+    const toggleCollapse = (type) => {
+      setTypeStates(prevState => ({
+        ...prevState,
+        [type]: !prevState[type]
+      }));
+    };
+
+    if (loading) {
+      return <Text>Loading...</Text>;
+    }
+  
+    if (error) {
+      return <Text>Error: {error.message}</Text>;
+    }
+
     return (
         <ScrollView contentContainerStyle = {Styles.scrollView}>
-          <Text style = {Styles.text}></Text>
-          <CreateCollapsible
-              title = "First Drink"
-              info = {drinks}
-              collapsed = {firstCollapsed}
-              setCollapsed = {setFirstCollapsed}
-          />
-          <CreateCollapsible
-            title = 'Second Drink'
-            info = {info}
-            collapsed = {secondCollapsed}
-            setCollapsed = {setSecondCollapsed}
-          />
+          {Object.keys(groupedData).map(type => (
+            <CreateCollapsible 
+              key = {type}
+              title = {type} 
+              info = {groupedData[type]} 
+              collapsed = {!typeStates[type]} 
+              setCollapsed = {() => toggleCollapse(type)}
+            />
+          ))}
+          
         </ScrollView>
     );
 }
+
+export default MenuScreen

@@ -59,6 +59,7 @@ styles = StyleSheet.create({
       backgroundColor: '#DDDDDD',
       padding: 10,
       marginBottom: 10,
+      borderWidth: 2,
     },
     label: {
         fontSize: 16,
@@ -82,6 +83,12 @@ styles = StyleSheet.create({
     },
     error: {
         color: 'red',
+    },
+    barListText: {
+      color: 'purple',
+      justifyContent: 'center',
+      fontSize: 20,
+      padding: 3,
     },
 })
 
