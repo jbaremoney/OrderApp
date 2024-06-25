@@ -5,10 +5,10 @@
 //To use either, but I will be using the class method moving forward because I worked hard on it :p
 
 //import CreateDrink from '../Classes/CreateDrink' //make sure this is the correct path
-import CreateCollapsible from '../Classes/CreateCollapsible';
+import CreateCollapsible from '../UI/CreateCollapsible';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View, StyleSheet, Text, Button, Image, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
-import Styles from '../mainStuff/StyleSheet'
+import { Text, ScrollView} from 'react-native';
+import Styles from '../UI/StyleSheet'
 import {db} from '../firebaseStuff/firebaseConfig'; // Path to your firebaseConfig.js
 import { collection, getDocs } from 'firebase/firestore';
 
@@ -81,7 +81,7 @@ export default function Screen2() {
     useEffect(() => {
       const fetchBars = async () => {
         try {
-          console.log("Fetching bars...");
+          console.log("Fetching drinks...");
           const drinkCollection = collection(db, 'bars/JoeBlacks-/drinks');
           const drinkSnapshot = await getDocs(drinkCollection);
           //console.log("Bars snapshot: ", barsSnapshot);

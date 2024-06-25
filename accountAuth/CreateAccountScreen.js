@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import Styles from '../mainStuff/StyleSheet'
+import Styles from '../UI/StyleSheet'
 
 
 export default function CreateAccountScreen() {
