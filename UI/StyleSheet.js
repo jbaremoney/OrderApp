@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 
-
 styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -41,6 +40,13 @@ styles = StyleSheet.create({
       color: 'purple',
       fontSize: 16,
       padding: 3,
+      textAlign: 'center',
+    },
+    headerText: {
+      color: 'purple',
+      fontSize: 30,
+      padding: 20,
+      textAlign: 'center',
     },
     collapseButton: {
         backgroundColor: 'green',

@@ -66,7 +66,7 @@ const HomeTabs = ({navigation}) => {
                  
         })}
       >
-        <Tab.Screen name="Order" component={BarsMenusNav} />
+        <Tab.Screen name="Order" component={BarsMenusNav}/>
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Gift" component={GiftScreen} />
         <Tab.Screen name="User Info" component={UserScreen} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseStuff/firebaseConfig';
 import styles from '../UI/StyleSheet';
@@ -47,7 +47,7 @@ const BarListScreen = ({ navigation }) => {
 
   return (
     <View style = {styles.container}>
-      <Text style = {styles.text}>Bar List</Text>
+      <Text style = {styles.headerText}>Bar List</Text>
       <FlatList
         data={bars}
         keyExtractor={(item) => item.id}
