@@ -3,10 +3,11 @@ import { View, Text, Image, Button } from 'react-native';
 import Styles from './StyleSheet';
 import useCartStore from '../Ordering/CartManage'; // Adjust the import path as necessary
 
-const CreateDrink = ({ drink }) => {
+const CreateDrink = ({ drink, remove = false}) => {
   
   const addToCart = useCartStore((state) => state.addToCart);
   const cart = useCartStore((state) => state.cart); // Access the cart state
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
 
   const { name, price, imageLink } = drink;
 
@@ -15,6 +16,11 @@ const CreateDrink = ({ drink }) => {
     addToCart(drink);
     console.log("cart contents:", cart); // this is one behind because something about asynchronous
   };
+
+  const handleRemoveFromCart = () => {
+    removeFromCart(drink);
+    console.log("cart contents:", cart); // this is one behind because something about asynchronous
+  }
 
   if (!drink || !name || !price || !imageLink) {
     return (
@@ -37,6 +43,11 @@ const CreateDrink = ({ drink }) => {
           onPress={handleAddToCart}
 
         />
+        {remove && <Button
+          style={Styles.button}
+          title="Remove from Cart"
+          onPress={handleRemoveFromCart}
+        />}
       </View>
     </View>
   );

@@ -8,17 +8,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const BarsMenusStack = createStackNavigator()
 
-export default function BarsMenusNav(){
+export default function BarsMenusNav({navigation}){
     return(
     <BarsMenusStack.Navigator initialRouteName="Bars" 
-        // screenOptions= {{headerRight:() => 
-        // <TouchableOpacity style = {{marginRight:20}} onPress={() => navigation.navigate('Cart')}>
-        //     <Icon
-        //         name = {'shopping-cart'}
-        //         color = {'black'}
-        //         size = {24}
-        //     />
-        // </TouchableOpacity>}}
+        screenOptions= {{headerRight:() => 
+        <TouchableOpacity style = {{marginRight:20}} onPress={() => navigation.navigate('Cart')}>
+            <Icon
+                name = {'shopping-cart'}
+                color = {'black'}
+                size = {24}
+            />
+        </TouchableOpacity>}}
         >
         <BarsMenusStack.Screen name="Bars" component={barListScreen} />
         <BarsMenusStack.Screen name="Drinks" component={MenuScreen}/>

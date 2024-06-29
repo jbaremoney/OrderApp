@@ -66,7 +66,7 @@ const HomeTabs = ({navigation}) => {
                  
         })}
       >
-        <Tab.Screen name="Order" component={BarsMenusNav}/>
+        <Tab.Screen name="Order" component={BarsMenusNav} options = {{headerShown: false}}/>
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Gift" component={GiftScreen} />
         <Tab.Screen name="User Info" component={UserScreen} />
@@ -79,7 +79,8 @@ function HomeScreen() {
       <Stack.Navigator screenOptions={{
         headerShown: false
       }}>
-        <Stack.Screen name="OrderTab" component={HomeTabs}/>
+        
+        <Stack.Screen name="Order " component={HomeTabs}/> 
         <Stack.Screen name="Cart" component={CartScreen}  options={
           {
             headerShown:true,

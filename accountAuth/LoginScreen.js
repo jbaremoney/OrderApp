@@ -5,12 +5,14 @@ import { View, Button, Text, TextInput, StyleSheet, Alert, ScrollView } from 're
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
 import Styles from '../UI/StyleSheet'
+import CheckBox from '../UI/Checkbox.js';
 
 
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false)
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -41,11 +43,16 @@ const LoginScreen = ({ navigation }) => {
       <Text style={Styles.label}>Password:</Text>
       <TextInput
         style={Styles.input}
-        secureTextEntry={true}
+        secureTextEntry={!showPassword}
         placeholder="Enter your password"
         value={password}
         onChangeText={setPassword}  // Update password state when text changes
       />
+      <CheckBox 
+        selected={showPassword} 
+        onPress={() => setShowPassword(!showPassword)}
+        text='Show password'
+      />  
       <Button title="Login" onPress={handleLogin} />
       <Button
         title="Create Account"

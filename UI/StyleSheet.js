@@ -22,7 +22,7 @@ styles = StyleSheet.create({
     scrollView: {
       justifyContent: 'space-between',
       backgroundColor: 'light-blue',
-      padding: 20,
+      padding: 16,
       margin: 10,
     },
     subContainer: {
@@ -96,6 +96,19 @@ styles = StyleSheet.create({
       fontSize: 20,
       padding: 3,
     },
+    title: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 16,
+    },
+    emptyText: {
+      fontSize: 18,
+      color: 'gray',
+    },
+    checkBox: {
+      flexDirection: 'row',
+      alignItems: 'center'
+  }
 })
 
 export default styles
