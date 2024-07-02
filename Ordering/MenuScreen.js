@@ -27,7 +27,7 @@ const MenuScreen = ({ route }) => {
             id: doc.id,
             ...doc.data()
           }));
-          console.log("Drink list: ", drinkList);
+          
           setDrinks(drinkList);
         } catch (error) {
           setError(error);

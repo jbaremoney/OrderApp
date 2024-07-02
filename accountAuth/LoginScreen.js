@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { View, Button, Text, TextInput, StyleSheet, Alert, ScrollView } from 'react-native';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
+import { auth, db } from '../firebaseStuff/firebaseConfig.js'; // Ensure this is the correct path to your Firebase auth module export
 import Styles from '../UI/StyleSheet'
 import CheckBox from '../UI/Checkbox.js';
 
@@ -28,6 +28,8 @@ const LoginScreen = ({ navigation }) => {
     Alert.alert("Login Failed", errorMessage);
   });
   };
+
+  
 
 
   return (
@@ -64,4 +66,22 @@ const LoginScreen = ({ navigation }) => {
 };
 
 
-export default LoginScreen;
+const isAdmin = async (userId) => {
+  try{
+    const userDoc = await getDoc(doc(db, 'users', userId))
+    if (userDoc.exists()){
+      const userData = userDoc.data();
+      return userData.isAdmin || 'null';
+    }
+    else {
+      console.log("document not found");
+      return "null"
+    }
+  } catch (error) {
+    console.error('Error getting document:', error);
+    return 'null';
+  }
+  
+}
+
+export default LoginScreen ;
