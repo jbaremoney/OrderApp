@@ -10,8 +10,8 @@ const CartScreen = () => {
     <ScrollView contentContainerStyle={styles.scrollView}>
       <Text style={styles.title}>Cart Contents:</Text>
       {cart.length > 0 ? (
-        cart.map((item, index) => (
-          <CreateDrink key={index} drink={item.drink} quantity={true} add={false} remove={true} />
+        cart.map((drink, index) => (
+          <CreateDrink key={index} drink={drink} isCart = {true} />
         ))
       ) : (
         <Text style={styles.emptyText}>Your cart is empty.</Text>

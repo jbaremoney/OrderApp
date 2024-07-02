@@ -25,6 +25,13 @@ styles = StyleSheet.create({
       padding: 16,
       margin: 10,
     },
+    profileView: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'light-blue',
+      padding: 16,
+      margin: 10,
+    },
     subContainer: {
       flex: 1,
       flexDirection: 'column',
@@ -35,6 +42,14 @@ styles = StyleSheet.create({
     image: {
       width: 200,
       height: 200,
+    },
+    profileImage: {
+      width: 200,
+      height: 200,
+      borderTopLeftRadius: 100,
+      borderTopRightRadius: 100,
+      borderBottomLeftRadius: 100,
+      borderBottomRightRadius: 100,
     },
     text: {
       color: 'purple',
