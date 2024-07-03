@@ -1,12 +1,9 @@
 
-//TODO make this screen funcitonal, as it just displays text.
-
-//import CreateDrink from '../Classes/CreateDrink' //make sure this is the correct path
 import CreateCollapsible from '../UI/CreateCollapsible';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View, StyleSheet, Text, Button, Image, SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
 import Styles from '../UI/StyleSheet'
-import {db} from '../firebaseStuff/firebaseConfig'; // Path to your firebaseConfig.js
+import {db} from '../firebaseStuff/firebaseConfig'; 
 import { collection, getDocs } from 'firebase/firestore';
 
 

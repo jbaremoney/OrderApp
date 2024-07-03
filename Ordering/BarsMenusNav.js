@@ -12,7 +12,7 @@ export default function BarsMenusNav({navigation}){
     return(
     <BarsMenusStack.Navigator initialRouteName="Bars" 
         screenOptions= {{headerRight:() => 
-        <TouchableOpacity style = {{marginRight:20}} onPress={() => navigation.navigate('Cart')}>
+        <TouchableOpacity style = {{marginRight:20}} onPress={() => navigation.navigate('POS')}>
             <Icon
                 name = {'shopping-cart'}
                 color = {'black'}
@@ -22,6 +22,7 @@ export default function BarsMenusNav({navigation}){
         >
         <BarsMenusStack.Screen name="Bars" component={barListScreen} />
         <BarsMenusStack.Screen name="Drinks" component={MenuScreen}/>
+        
     </BarsMenusStack.Navigator>
     )
 }

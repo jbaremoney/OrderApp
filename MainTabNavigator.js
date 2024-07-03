@@ -5,9 +5,9 @@ import UserScreen from './User/UserScreen';
 import BarsMenusNav  from './Ordering/BarsMenusNav';
 import MapScreen  from './Map/MapScreen';
 import GiftScreen  from './Rewards/GiftScreen';
-import CartScreen from './Ordering/CartScreen'
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
+import PosNav from './Ordering/PosNav';
 
 
 //Need user icon, drink icon, map icon, gift icon
@@ -55,7 +55,7 @@ const HomeTabs = ({navigation}) => {
       
                  headerRight:() => <TouchableOpacity style = {{marginRight:20}} onPress={() => 
                     
-                    navigation.navigate('Cart')
+                    navigation.navigate('POS')
                   }>
                     <Icon
                        name = {'shopping-cart'}
@@ -81,12 +81,13 @@ function HomeScreen() {
       }}>
         
         <Stack.Screen name="Order " component={HomeTabs}/> 
-        <Stack.Screen name="Cart" component={CartScreen}  options={
+        <Stack.Screen name="POS" component={PosNav}  options={
           {
-            headerShown:true,
+            headerShown:false,
           }
         }
         />
+        
       </Stack.Navigator>
   );
 }
