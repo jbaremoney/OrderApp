@@ -8,6 +8,7 @@ import GiftScreen  from './Rewards/GiftScreen';
 import { TouchableOpacity } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'; //need for navigation between screens
 import PosNav from './Ordering/PosNav';
+import UserNav from './User/UserNav';
 
 
 //Need user icon, drink icon, map icon, gift icon
@@ -69,7 +70,7 @@ const HomeTabs = ({navigation}) => {
         <Tab.Screen name="Order" component={BarsMenusNav} options = {{headerShown: false}}/>
         <Tab.Screen name="Map" component={MapScreen} />
         <Tab.Screen name="Gift" component={GiftScreen} />
-        <Tab.Screen name="User Info" component={UserScreen} />
+        <Tab.Screen name="User Info" component={UserNav} options = {{headerShown: false}}/>
       </Tab.Navigator>//This all is adding the screens to the tab. You can add as many screens as you want. 
   );
 };

@@ -3,19 +3,13 @@
 import { Image, View, Text, ScrollView, ActivityIndicator, Button, TouchableOpacity } from 'react-native';
 import styles from '../UI/StyleSheet';
 import React, { useState, useEffect } from 'react';
-import { auth, db } from '../firebaseStuff/firebaseConfig'; // Adjust the import path as per your file structure
-import { doc, getDoc} from 'firebase/firestore';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-const placeholderFunction = () => {
-  console.log("This doesn't do anything yet"); // this is just for the buttons that don't have functions yet.
-};
 
-const UserScreen = ({navigation}) => {
-  const [username, setUsername] = useState('');
+const IdentificationScreen = () => {
   const [loading, setLoading] = useState(true);
   const [image, setImage] = useState(null);
 
@@ -24,7 +18,7 @@ const UserScreen = ({navigation}) => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [3, 3],
+      aspect: [2, 1],
       quality: 1,
     });
 
@@ -37,19 +31,19 @@ const UserScreen = ({navigation}) => {
   };
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchID = async () => {
       try {
-        const userId = auth.currentUser.uid; // Get current user's UID from Firebase Authentication
-        const userDocRef = doc(db, 'users', userId);
-        const document = await getDoc(userDocRef);
-        if (document.exists) {
-          const userData = document.data(); // This should be an object containing your user data
-          setUsername(userData.username); 
-        } else {
-          console.log('No such document!');
-        }
+        // const userId = auth.currentUser.uid; // Get current user's UID from Firebase Authentication
+        // const userDocRef = doc(db, 'users', userId);
+        // const document = await getDoc(userDocRef);
+        // if (document.exists) {
+        //   const userData = document.data(); // This should be an object containing your user data
+        //   setUsername(userData.username); 
+        // } else {
+        //   console.log('No such document!');
+        // }
 
-        const savedUri = await AsyncStorage.getItem('profilePictureUri');
+        const savedUri = await AsyncStorage.getItem('identificationPictureUri');
         if (savedUri !== null) {
           setImage(savedUri);
         }
@@ -61,12 +55,12 @@ const UserScreen = ({navigation}) => {
       }
     };
 
-    fetchUserData();
+    fetchID();
   }, []);
 
   const saveImageUri = async (uri) => {
     try {
-      await AsyncStorage.setItem('profilePictureUri', uri);
+      await AsyncStorage.setItem('identificationPictureUri', uri);
     } catch (error) {
       console.log('Error saving image URI to AsyncStorage:', error);
     }
@@ -83,7 +77,7 @@ const UserScreen = ({navigation}) => {
 
     return (
       <ScrollView contentContainerStyle = {styles.profileView}>
-        <Text style = {styles.title}> {username} </Text>
+        <Text style = {styles.title}> Identification </Text>
         <TouchableOpacity onPress={pickImage}>
           {image ? (
             <Image source={{ uri: image }} style={styles.profileImage} />
@@ -91,18 +85,18 @@ const UserScreen = ({navigation}) => {
             <Image source={{uri: "https://hopcitybeer.com/cdn/shop/products/bud_light_d3e4898b-b744-4952-a3c3-e7feb28a00d4.png?v=1684175488&width=480" }} style={styles.profileImage} /> 
           )}
         </TouchableOpacity>
-        
+{/*         
         <Text style = {styles.text}>Favorite Bar: *insert a way to choose*</Text>
         <Text style = {styles.text}>Favorite Drink: *insert a way to choose*</Text>
 
-        {/* <Button title="Select Profile Picture" onPress={pickImage} /> */}
-        <Button title = 'Identification' style = {styles.button} onPress={() => navigation.navigate('Identification')}/>
+        {/* <Button title="Select Profile Picture" onPress={pickImage} /> 
+        <Button title = 'Identification' style = {styles.button} onPress={placeholderFunction}/>
         <Button title = 'Payment Method' style = {styles.button} onPress={placeholderFunction}/>
         <Button title = 'Update Information' style = {styles.button} onPress={placeholderFunction}/>
-        <Button title = 'Order History' style = {styles.button} onPress={placeholderFunction}/>
+        <Button title = 'Order History' style = {styles.button} onPress={placeholderFunction}/> */}
 
       </ScrollView>
     );
   }
 
-export default UserScreen
+export default IdentificationScreen
