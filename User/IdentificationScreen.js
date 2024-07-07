@@ -1,5 +1,3 @@
-//TODO make this screen funcitonal, as it just displays text. 
-
 import { Image, View, Text, ScrollView, ActivityIndicator, Button, TouchableOpacity } from 'react-native';
 import styles from '../UI/StyleSheet';
 import React, { useState, useEffect } from 'react';
@@ -8,13 +6,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-
 const IdentificationScreen = () => {
   const [loading, setLoading] = useState(true);
-  const [image, setImage] = useState(null);
+  const [frontImage, setFrontImage] = useState(null);
+  const [backImage, setBackImage] = useState(null);
 
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
+
+  const pickFrontImage = async () => {
+    // Don't wanna mess with async stuff so two separate functions that do the same thing
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -22,30 +21,38 @@ const IdentificationScreen = () => {
       quality: 1,
     });
 
-    //console.log(result); //for testing
+    if (!result.canceled) {
+      setFrontImage(result.assets[0].uri); //Don't honestly know why this works but it does.
+      saveImageUri(result.assets[0].uri, 'frontImageUri'); // Save selected image URI to AsyncStorage which persists between sessions
+    }
+  };
+
+  const pickBackImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [2, 1],
+      quality: 1,
+    });
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri); //Don't honestly know why this works but it does.
-      saveImageUri(result.assets[0].uri); // Save selected image URI to AsyncStorage
+      setBackImage(result.assets[0].uri); //Don't honestly know why this works but it does.
+      saveImageUri(result.assets[0].uri, 'backImageUri'); // Save selected image URI to AsyncStorage
     }
   };
 
   useEffect(() => {
     const fetchID = async () => {
       try {
-        // const userId = auth.currentUser.uid; // Get current user's UID from Firebase Authentication
-        // const userDocRef = doc(db, 'users', userId);
-        // const document = await getDoc(userDocRef);
-        // if (document.exists) {
-        //   const userData = document.data(); // This should be an object containing your user data
-        //   setUsername(userData.username); 
-        // } else {
-        //   console.log('No such document!');
-        // }
+    //AsyncStorage holds all pics, so you can use them in any area of the program.
+        const savedFrontUri = await AsyncStorage.getItem('frontImageUri');
+        if (savedFrontUri !== null) {
+          setFrontImage(savedFrontUri);
+        }
 
-        const savedUri = await AsyncStorage.getItem('identificationPictureUri');
-        if (savedUri !== null) {
-          setImage(savedUri);
+        const savedBackUri = await AsyncStorage.getItem('backImageUri');
+        if (savedBackUri !== null) {
+          setBackImage(savedBackUri);
         }
 
       } catch (error) {
@@ -58,9 +65,10 @@ const IdentificationScreen = () => {
     fetchID();
   }, []);
 
-  const saveImageUri = async (uri) => {
+  const saveImageUri = async (uri, asyncItemName) => {
+    //this sends the image to AsyncStorage under the name asyncItemName
     try {
-      await AsyncStorage.setItem('identificationPictureUri', uri);
+      await AsyncStorage.setItem(asyncItemName, uri);
     } catch (error) {
       console.log('Error saving image URI to AsyncStorage:', error);
     }
@@ -78,22 +86,23 @@ const IdentificationScreen = () => {
     return (
       <ScrollView contentContainerStyle = {styles.profileView}>
         <Text style = {styles.title}> Identification </Text>
-        <TouchableOpacity onPress={pickImage}>
-          {image ? (
-            <Image source={{ uri: image }} style={styles.profileImage} />
+        <Text style = {styles.title}> Front</Text>
+        <TouchableOpacity onPress={pickFrontImage}>
+          {frontImage ? (//this picks the regular image or a default one. 
+            <Image source={{ uri: frontImage }} style={styles.idImage} />
           ) : (
-            <Image source={{uri: "https://hopcitybeer.com/cdn/shop/products/bud_light_d3e4898b-b744-4952-a3c3-e7feb28a00d4.png?v=1684175488&width=480" }} style={styles.profileImage} /> 
+            <Image source={{uri: "https://hopcitybeer.com/cdn/shop/products/bud_light_d3e4898b-b744-4952-a3c3-e7feb28a00d4.png?v=1684175488&width=480" }} style={styles.idImage} /> 
           )}
         </TouchableOpacity>
-{/*         
-        <Text style = {styles.text}>Favorite Bar: *insert a way to choose*</Text>
-        <Text style = {styles.text}>Favorite Drink: *insert a way to choose*</Text>
 
-        {/* <Button title="Select Profile Picture" onPress={pickImage} /> 
-        <Button title = 'Identification' style = {styles.button} onPress={placeholderFunction}/>
-        <Button title = 'Payment Method' style = {styles.button} onPress={placeholderFunction}/>
-        <Button title = 'Update Information' style = {styles.button} onPress={placeholderFunction}/>
-        <Button title = 'Order History' style = {styles.button} onPress={placeholderFunction}/> */}
+        <Text style = {styles.title}> Back</Text>
+        <TouchableOpacity onPress={pickBackImage}>
+          {backImage ? (
+            <Image source={{ uri: backImage }} style={styles.idImage} />
+          ) : (
+            <Image source={{uri: "https://hopcitybeer.com/cdn/shop/products/bud_light_d3e4898b-b744-4952-a3c3-e7feb28a00d4.png?v=1684175488&width=480" }} style={styles.idImage} /> 
+          )}
+        </TouchableOpacity>
 
       </ScrollView>
     );

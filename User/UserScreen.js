@@ -49,7 +49,7 @@ const UserScreen = ({navigation}) => {
           console.log('No such document!');
         }
 
-        const savedUri = await AsyncStorage.getItem('profilePictureUri');
+        const savedUri = await AsyncStorage.getItem('profilePictureUri'); //gets the profilePic selected before if possible.
         if (savedUri !== null) {
           setImage(savedUri);
         }
@@ -66,7 +66,7 @@ const UserScreen = ({navigation}) => {
 
   const saveImageUri = async (uri) => {
     try {
-      await AsyncStorage.setItem('profilePictureUri', uri);
+      await AsyncStorage.setItem('profilePictureUri', uri); //sends the profile pic chosen to asyncstorage
     } catch (error) {
       console.log('Error saving image URI to AsyncStorage:', error);
     }
@@ -95,11 +95,10 @@ const UserScreen = ({navigation}) => {
         <Text style = {styles.text}>Favorite Bar: *insert a way to choose*</Text>
         <Text style = {styles.text}>Favorite Drink: *insert a way to choose*</Text>
 
-        {/* <Button title="Select Profile Picture" onPress={pickImage} /> */}
         <Button title = 'Identification' style = {styles.button} onPress={() => navigation.navigate('Identification')}/>
-        <Button title = 'Payment Method' style = {styles.button} onPress={placeholderFunction}/>
-        <Button title = 'Update Information' style = {styles.button} onPress={placeholderFunction}/>
-        <Button title = 'Order History' style = {styles.button} onPress={placeholderFunction}/>
+        <Button title = 'Payment Method' style = {styles.button} onPress={() => navigation.navigate('Payment Method')}/>
+        <Button title = 'Update Information' style = {styles.button} onPress={() => navigation.navigate('Update Information')}/>
+        <Button title = 'Order History' style = {styles.button} onPress={() => navigation.navigate('Order History')}/>
 
       </ScrollView>
     );

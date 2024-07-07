@@ -4,6 +4,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import UserScreen from "./UserScreen";
 import IdentificationScreen from "./IdentificationScreen"
+import OrderHistoryScreen from "./OrderHistoryScreen";
+import PaymentInformationScreen from "./PaymentMethodScreen";
+import UpdateInformationScreen from "./UpdateInformationScreen";
 
 
 
@@ -23,6 +26,10 @@ export default function UserNav({navigation}){
         >
         <UserStack.Screen name="Profile Information" component={UserScreen} />
         <UserStack.Screen name="Identification" component={IdentificationScreen}/>
+        <UserStack.Screen name="Payment Method" component={PaymentInformationScreen}/>
+        <UserStack.Screen name="Update Information" component={UpdateInformationScreen}/>
+        <UserStack.Screen name="Order History" component={OrderHistoryScreen}/>
+
         
     </UserStack.Navigator>
     )

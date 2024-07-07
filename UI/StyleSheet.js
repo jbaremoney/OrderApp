@@ -26,7 +26,7 @@ styles = StyleSheet.create({
       margin: 10,
     },
     profileView: {
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems: 'center',
       backgroundColor: 'light-blue',
       padding: 16,
@@ -42,6 +42,10 @@ styles = StyleSheet.create({
     image: {
       width: 200,
       height: 200,
+    },
+    idImage: {
+      height: 260,
+      width: 340
     },
     profileImage: {
       width: 200,
