@@ -1,15 +1,19 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, Button, View } from 'react-native';
-import useCartStore from '../Ordering/CartManage'; 
+import useCartStore from './CartManage'; 
 import CreateDrink from '../UI/CreateDrink'; 
 
 const CartScreen = ({navigation}) => {
-  const cart = useCartStore((state) => state.cart);
+  const cart = useCartStore((state) => state.cart); // accessing cart attribute of zustand
+
+  const getSubtotal = useCartStore((state) => state.getSubtotal); // accessing get subtotal method of zustand
+  const subtotal = getSubtotal(cart); // subtotal const using method above
   
   const handleCheckout = () => {
     console.log('Proceeding to checkout with items:', cart);
     navigation.navigate('Checkout') 
   };
+
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>
@@ -20,6 +24,7 @@ const CartScreen = ({navigation}) => {
             <CreateDrink key={index} drink={item.drink} quantity={true} add={false} remove={true} />
           ))}
           <View style={styles.buttonContainer}>
+          <Text style={styles.totalText}>Subtotal: ${subtotal.toFixed(2)}</Text>
             <Button title="Checkout" onPress={handleCheckout} />
           </View>
         </>

@@ -21,7 +21,10 @@ const useCartStore = create((set) => ({
       item.drink.id === drink.id && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
     ),
   })),
-  
+  getSubtotal: (cart) => {
+    
+    return cart.reduce((total, item) => total + item.drink.price * item.quantity, 0);
+  },
 }));
 
 export default useCartStore;
