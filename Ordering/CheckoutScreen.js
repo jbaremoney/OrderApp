@@ -10,6 +10,7 @@ const CheckoutScreen = () => {
   const [tip, setTip] = useState('');
   
   const cart = useCartStore((state) => state.cart) // accessing cart attribute of zustand
+  const barId = useCartStore((state) => state.bar) // getting bar id to know where to send order
   const getSubtotal = useCartStore((state) => state.getSubtotal);  // accessing get subtotal method of zustand
   const subtotal = getSubtotal(cart);  // set subtotal const using getSubtotal method above
 
@@ -40,13 +41,15 @@ const CheckoutScreen = () => {
     return;
   }
   const currentUser = auth.currentUser;
+  
 
   if (!currentUser) {
     Alert.alert('Error', 'User not logged in.');
     return;
   }
 
-  const orderData = {
+  const userOrderData = {
+    bar: barId,
     paymentMethod: selectedPaymentMethod.name,
     totalAmount: calculateTotalAmount(),
     timestamp: Timestamp.now(),
@@ -58,14 +61,36 @@ const CheckoutScreen = () => {
     })),
     tip: parseFloat(tip) || 0,
     tax: taxAmount,
+    fulfilled: false,
   };
+  const barOrderData = {
+    customer: currentUser.uid,
+    paymentMethod: selectedPaymentMethod.name,
+    totalAmount: calculateTotalAmount(),
+    timestamp: Timestamp.now(),
+    items: cart.map(item => ({
+      id: item.drink.id,
+      name: item.drink.name,
+      price: item.drink.price,
+      quantity: item.quantity,
+    })),
+    tip: parseFloat(tip) || 0,
+    tax: taxAmount,
+    fulfilled: false,
+  }
 
   try {
-    const userDocRef = doc(db, 'users', currentUser.uid); // Replace with dynamic user ID if needed
+    const userDocRef = doc(db, 'users', currentUser.uid);  // doing same stuff for bar and user, j using slightly diff data
+    const barDocRef = doc(db, 'bars', barId);
+    
     const ordersCollectionRef = collection(userDocRef, 'OrderHist');
-    await addDoc(ordersCollectionRef, orderData);
+    const barOrdersCollectionRef = collection(barDocRef, 'orders')
+    
+    await addDoc(ordersCollectionRef, userOrderData);
+    await addDoc(barOrdersCollectionRef, barOrderData);
 
     Alert.alert('Success', `Payment of $${calculateTotalAmount().toFixed(2)} made using ${selectedPaymentMethod.name}`);
+    console.log("success placing order")
   } catch (error) {
     console.error('Error adding document: ', error);
     Alert.alert('Error', 'There was an issue processing your order. Please try again.');

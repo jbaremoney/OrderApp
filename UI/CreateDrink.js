@@ -1,27 +1,41 @@
 import React from 'react';
-import { View, Text, Image, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, Button, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import Styles from './StyleSheet';
 import useCartStore from '../Ordering/CartManage'; // Adjust the import path as necessary
 
-const CreateDrink = ({ drink, add = true, remove = false, quantity = false }) => {
+const CreateDrink = ({ drink, barId, add = true, remove = false, quantity = false }) => {
   const addToCart = useCartStore((state) => state.addToCart);
+  const clearCart = useCartStore((state) => state.clearCart);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
   const cartItem = useCartStore((state) => state.cart.find((item) => item.drink.id === drink.id));
-  const cart = useCartStore((state) => state.cart)
+  const cart = useCartStore((state) => state.cart);
 
   const { name, price, imageLink } = drink;
-  
 
   const handleAddToCart = () => {
-    addToCart(drink);
-    console.log(drink)
-    console.log("Cart contents: ", cart)
+    try {
+      addToCart(drink, barId);
+    } catch (error) {
+      Alert.alert(
+        'Error',
+        error.message,
+        [
+          {
+            text: 'Keep Cart',
+            onPress: () => console.log('Keep Cart Pressed'),
+            style: 'cancel',
+          },
+          { text: 'Clear Cart', onPress: () => clearCart() },
+        ],
+        { cancelable: false }
+      );
+    }
   };
 
   const handleRemoveFromCart = () => {
     removeFromCart(drink);
-    console.log(cart)
+    console.log(cart);
   };
 
   const handleDecreaseQuantity = () => {

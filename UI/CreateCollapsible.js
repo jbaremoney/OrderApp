@@ -26,7 +26,7 @@ export default class CreateCollapsible extends React.Component {
         </TouchableOpacity>
         <Collapsible collapsed={this.props.collapsed}>
           {this.props.info.map((drink, index) => (
-            <CreateDrink key={index} drink={drink}/>
+            <CreateDrink key={index} drink={drink} barId={this.props.barId}/> // use the barId to make sure only ordering from 1 bar
           ))}
         </Collapsible>
       </View>

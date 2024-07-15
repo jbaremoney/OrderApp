@@ -7,11 +7,13 @@ import {db} from '../firebaseStuff/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 
 
+
 const MenuScreen = ({ route }) => {
     const { barId } = route.params;
     const [drinks, setDrinks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
 
     useEffect(() => {
       const fetchBars = async () => {
@@ -68,7 +70,8 @@ const MenuScreen = ({ route }) => {
           {Object.keys(groupedData).map(type => (
             <CreateCollapsible 
               key = {type}
-              title = {type} 
+              title = {type}
+              barId = {barId} 
               info = {groupedData[type]} 
               collapsed = {!typeStates[type]} 
               setCollapsed = {() => toggleCollapse(type)}

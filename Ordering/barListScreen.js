@@ -3,11 +3,15 @@ import { View, Text, FlatList, TouchableOpacity, ScrollView } from 'react-native
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseStuff/firebaseConfig';
 import styles from '../UI/StyleSheet';
+ 
+
 
 const BarListScreen = ({ navigation }) => {
   const [bars, setBars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  //const setBar = useCartStore((state) => state.setBar); dont do this here
 
   useEffect(() => {
     const fetchBars = async () => {
@@ -35,6 +39,9 @@ const BarListScreen = ({ navigation }) => {
 
   const handleBarPress = (barId) => {
     navigation.navigate('Drinks', { barId });
+    
+
+
   };
 
   if (loading) {
