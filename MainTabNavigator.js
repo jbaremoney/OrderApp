@@ -32,7 +32,7 @@ const HomeTabs = ({navigation}) => {
                 case 'Map':
                   iconName = 'map-marker';
                   break;
-                case 'Gift':
+                case 'Rewards':
                   iconName = 'gift';
                   break;
                 case 'User Info':
@@ -69,7 +69,7 @@ const HomeTabs = ({navigation}) => {
       >
         <Tab.Screen name="Order" component={BarsMenusNav} options = {{headerShown: false}}/>
         <Tab.Screen name="Map" component={MapScreen} />
-        <Tab.Screen name="Gift" component={GiftScreen} />
+        <Tab.Screen name="Rewards" component={GiftScreen} />
         <Tab.Screen name="User Info" component={UserNav} options = {{headerShown: false}}/>
       </Tab.Navigator>//This all is adding the screens to the tab. You can add as many screens as you want. 
   );

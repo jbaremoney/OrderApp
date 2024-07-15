@@ -1,3 +1,7 @@
+//Update orders in the bar database too
+//figure out how to add credit cards and stuff
+//do proceed to payment
+
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
@@ -27,7 +31,22 @@ const CheckoutScreen = () => {
   };
 
   const handleTipChange = (value) => {
-    setTip(value);
+    // Remove non-numeric characters except dot
+    const cleanedText = value.replace(/[^0-9.]/g, '');
+    
+    // Split the text into integer and decimal parts
+    const parts = cleanedText.split('.');
+    let formattedText = cleanedText;
+    
+    // Ensure there's at most one dot and format decimals
+    if (parts.length > 1) {
+      const integerPart = parts[0];
+      let decimalPart = parts[1];
+      decimalPart = decimalPart.slice(0, 2); // Limit decimal part to two digits
+      formattedText = `${integerPart}.${decimalPart}`;
+    }
+
+    setTip(formattedText);
   };
 
   const calculateTotalAmount = () => {
@@ -133,7 +152,7 @@ const CheckoutScreen = () => {
           <Text style={styles.subtitle}>Subtotal: ${subtotal.toFixed(2)}</Text>
           <Text style={styles.subtitle}>Tax: ${taxAmount.toFixed(2)}</Text>
           <Text style={styles.subtitle}>Tip: ${parseFloat(tip || 0).toFixed(2)}</Text>
-          <Text style={styles.totalText}>Total: ${calculateTotalAmount().toFixed(2)}</Text>
+          <Text style={styles.title}>Total: ${calculateTotalAmount().toFixed(2)}</Text>
         </View>
 
         <Button

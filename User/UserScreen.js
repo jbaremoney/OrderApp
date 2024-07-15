@@ -7,12 +7,9 @@ import { auth, db } from '../firebaseStuff/firebaseConfig'; // Adjust the import
 import { doc, getDoc} from 'firebase/firestore';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import 'firebase/auth';
 
 
-
-const placeholderFunction = () => {
-  console.log("This doesn't do anything yet"); // this is just for the buttons that don't have functions yet.
-};
 
 const UserScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
@@ -72,6 +69,15 @@ const UserScreen = ({navigation}) => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await auth.signOut(); // Sign out the user from Firebase
+      navigation.navigate('Login'); // Navigate back to the login screen
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   if (loading) { //the ActivityIndicator is basically a loading wheel
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -88,7 +94,7 @@ const UserScreen = ({navigation}) => {
           {image ? (
             <Image source={{ uri: image }} style={styles.profileImage} />
           ) : (
-            <Image source={{uri: "https://hopcitybeer.com/cdn/shop/products/bud_light_d3e4898b-b744-4952-a3c3-e7feb28a00d4.png?v=1684175488&width=480" }} style={styles.profileImage} /> 
+            <Image source={require('../assets/DefaultProfilePic.png')} style={styles.profileImage} /> 
           )}
         </TouchableOpacity>
         
@@ -99,6 +105,7 @@ const UserScreen = ({navigation}) => {
         <Button title = 'Payment Method' style = {styles.button} onPress={() => navigation.navigate('Payment Method')}/>
         <Button title = 'Update Information' style = {styles.button} onPress={() => navigation.navigate('Update Information')}/>
         <Button title = 'Order History' style = {styles.button} onPress={() => navigation.navigate('Order History')}/>
+        <Button title = 'Logout' style = {styles.button} onPress={handleLogout}/>
 
       </ScrollView>
     );

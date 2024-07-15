@@ -7,6 +7,26 @@ styles = StyleSheet.create({
       justifyContent: 'center',
       padding: 20
     },
+    mapContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    rewardsContainer: {
+      flex: 1,
+      alignItems: 'center',
+      paddingTop: 15
+    },
+    markerContainer: {
+      backgroundColor: 'white', 
+      padding: 10,
+      alignContent: 'center',
+      justifyContent: 'center',
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      borderBottomLeftRadius: 20,
+      borderBottomRightRadius: 20,
+    },
     createAccountContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -54,6 +74,8 @@ styles = StyleSheet.create({
       borderTopRightRadius: 100,
       borderBottomLeftRadius: 100,
       borderBottomRightRadius: 100,
+      borderWidth: 1,
+      borderColor: 'black'
     },
     text: {
       color: 'purple',
@@ -127,7 +149,11 @@ styles = StyleSheet.create({
     checkBox: {
       flexDirection: 'row',
       alignItems: 'center'
-  }
+   },
+   map: {
+    width: '100%',
+    height: '100%',
+  },
 })
 
 export default styles

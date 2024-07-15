@@ -73,6 +73,7 @@ const MenuScreen = ({ route }) => {
               title = {type}
               barId = {barId} 
               info = {groupedData[type]} 
+              barID = {barId}
               collapsed = {!typeStates[type]} 
               setCollapsed = {() => toggleCollapse(type)}
             />
