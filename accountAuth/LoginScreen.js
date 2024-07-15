@@ -49,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
         placeholder="Enter your password"
         value={password}
         onChangeText={setPassword}  // Update password state when text changes
-      />
+      /> 
       <CheckBox 
         selected={showPassword} 
         onPress={() => setShowPassword(!showPassword)}

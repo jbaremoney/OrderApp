@@ -9,7 +9,7 @@ import useCartStore from './CartManage';
 import { db, auth } from '../firebaseStuff/firebaseConfig'
 import { collection, addDoc, doc, Timestamp } from 'firebase/firestore';
 
-const CheckoutScreen = () => {
+const CheckoutScreen = ({ navigation }) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   const [tip, setTip] = useState('');
   
@@ -110,6 +110,7 @@ const CheckoutScreen = () => {
 
     Alert.alert('Success', `Payment of $${calculateTotalAmount().toFixed(2)} made using ${selectedPaymentMethod.name}`);
     console.log("success placing order")
+    navigation.navigate('Confirmation', { userOrderData });
   } catch (error) {
     console.error('Error adding document: ', error);
     Alert.alert('Error', 'There was an issue processing your order. Please try again.');
@@ -147,7 +148,7 @@ const CheckoutScreen = () => {
           value={tip}
           onChangeText={handleTipChange}
         />
-
+        
         <View>
           <Text style={styles.subtitle}>Subtotal: ${subtotal.toFixed(2)}</Text>
           <Text style={styles.subtitle}>Tax: ${taxAmount.toFixed(2)}</Text>
