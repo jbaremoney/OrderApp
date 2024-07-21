@@ -1,19 +1,19 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, Button, View } from 'react-native';
-import useCartStore from './CartManage'; 
-import CreateDrink from '../UI/CreateDrink'; 
+import { ScrollView, StyleSheet, Text, Button, View, Alert } from 'react-native';
+import useCartStore from './CartManage';
+import CreateDrink from '../UI/CreateDrink';
+
 
 const CartScreen = ({navigation}) => {
   const cart = useCartStore((state) => state.cart); // accessing cart attribute of zustand
 
   const getSubtotal = useCartStore((state) => state.getSubtotal); // accessing get subtotal method of zustand
   const subtotal = getSubtotal(cart); // subtotal const using method above
-  
+
   const handleCheckout = () => {
     console.log('Proceeding to checkout with items:', cart);
-    navigation.navigate('Checkout') 
+    navigation.navigate('Checkout'); // Navigate to CheckoutScreen
   };
-
 
   return (
     <ScrollView contentContainerStyle={styles.scrollView}>

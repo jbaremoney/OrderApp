@@ -16,26 +16,28 @@ export default function CreateAccountScreen() {
     const firestore = getFirestore();
 
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // User account created & signed in!
-        console.log('User account created & signed in!');
-        // After successful creation, store the username in Firestore
-        const user = userCredential.user;
-        return setDoc(doc(firestore, "users", user.uid), {
-          username: username,
-          email: email,
-          cart: {}
-        });
-      })
-      .then(() => {
-        console.log("Username and email saved in Firestore");
-      })
-      .catch(error => {
-        setError(error.message);
-        console.error(error);
-      });
-  };
+  .then((userCredential) => {
+    // User account created & signed in!
+    console.log('User account created & signed in!');
+    const user = userCredential.user;
+    // Log user object
+    console.log('User object:', user);
+    return setDoc(doc(firestore, "users", user.uid), {
+      username: username,
+      email: email,
+      cart: {}
+    });
+  })
+  .then(() => {
+    console.log("Username and email saved in Firestore");
+  })
+  .catch(error => {
+    setError(error.message);
+    console.error('Error during Firestore operation:', error);
+  });
 
+
+  }
   return (
     <View style={Styles.createAccountContainer}>
       <TextInput
@@ -68,3 +70,4 @@ export default function CreateAccountScreen() {
     </View>
   );
 }
+

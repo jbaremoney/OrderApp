@@ -21,17 +21,14 @@ const OrderConfirmationScreen = ({ route, navigation }) => {
         </View>
       ))}
 
-      
-      <Button title="Back to Home" onPress={() => navigation.navigate('HomeScreen')} /> {/*fix this!!!*/}
+      <Button title="Back to Home" onPress={() => navigation.navigate('HomeScreen')} />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
-    alignItems: 'center',
   },
   title: {
     fontSize: 24,
@@ -42,10 +39,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 10,
-    marginBottom: 10,
   },
   item: {
-    marginVertical: 10,
+    marginBottom: 10,
   },
   itemText: {
     fontSize: 16,
