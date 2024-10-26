@@ -4,7 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAvgN5IbAB3xas_WQErSDs7W7m6vill08s",
+    apiKey: "HIDDEN",
     authDomain: "orderapp-4b33a.firebaseapp.com",
     projectId: "orderapp-4b33a",
     storageBucket: "orderapp-4b33a.appspot.com",
